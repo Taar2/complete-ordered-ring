@@ -1,3 +1,9 @@
+/-
+Copyright (c) 2022 Laurent Bonaventure. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Laurent Bonaventure
+-/
+
 noncomputable theory
 
 /- This one proves that a ring with axioms r1-r15,
