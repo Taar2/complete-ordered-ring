@@ -1,6 +1,6 @@
 # complete integral domains
 
-Let's call a ring *complete*, if we can equip it with a total order that is both translation invariant and compatible with the ring multiplication, such that some completeness property (*i.e.*, similar to the completeness of the field of the real numbers) is satisfied.
+Let's call a ring *complete*, if we can equip it with a total order that is both translation invariant and compatible with the ring multiplication, such that some completeness (*i.e.*, similar to the completeness of the field of the real numbers) hypothesis is satisfied.
 
 The goal here is to prove that under a mild completeness hypothesis (namely, that any bounded increasing sequence converges, see https://en.wikipedia.org/wiki/Completeness_of_the_real_numbers#Monotone_convergence_theorem), the only complete integral domains are (up to isomorphism) $\mathbb{Z}$ and $\mathbb{R}$.
 
@@ -30,15 +30,15 @@ $$\begin{aligned}
 
 Axioms $(R_6)$ to $(R_{14})$ are standard for a (commutative) ring with unity, while axioms $(R_1)$ to $(R_5)$ ensure that $R$ is an *ordered* ring and, by $(R_5)$, an *integral domain*, as long as $0\neq 1$.
 
-As it's stated using $\lt$ instead of $\le$, axiom $(R_{15})$ is weaker than the more usual *monotone convergence theorem/axiom*, but is enough for our goals, provided $(H')$ is true (see below).
+As it is stated using $\lt$ instead of $\le$, axiom $(R_{15})$ is weaker than the more usual *monotone convergence theorem* (axiom), but is enough to imply it, provided $(H')$ is true (see below).
 
 If $0=1$, then $R$ is a zero ring: all elements are equal to $0$ by $(R_7)$ and $(R_8)$. This is checked using ``lean`` in the file ``case1_singleton.lean``.
 
 If $0\neq 1$, then $0\lt 1$; this is checked in ``base.lean``.
 
-If $(H)$ there is no element of $R$ in the interval $(0,1)$, then $R$ is isomorphic to $\mathbb{Z}$. This is checked in ``case2_integers.lean``,where we take $(H)$ as an additional axiom.
+If $(H)$: there is no element of $R$ in the interval $(0,1)$, then $R$ is isomorphic to $\mathbb{Z}$. This is checked in ``case2_integers.lean``, where we take $(H)$ as an additional axiom.
 
-If $(H')$ there is at least one element of $R$ between $0$ and $1$, then $(R,+,\times,0,1,\lt)$ is isomorphic to the field $\mathbb{R}$ of the real numbers. In particular, $R$ is a field. This is checked in ``case3_reals.lean``, where we take $(H')$ as an additional axiom.
+If $(H')$: there is at least one element of $R$ between $0$ and $1$, then $(R,+,\times,0,1,\lt)$ is isomorphic to the field $\mathbb{R}$ of the real numbers. In particular, $R$ is a field. This is checked in ``case3_reals.lean``, where we take $(H')$ as an additional axiom.
 
 ## lean version
 
@@ -46,15 +46,25 @@ We use ``lean`` version 3 with ``propext`` and some *classical* extensions (``cl
 
 ``mathlib`` isn't used, and this drastically reduces the available tactics.
 
+## intermediate results
+
+During the study of the $(H')$ case, we establish the following results:
+* a convergence theorem for geometric sequences;
+* the usual monotone convergence theorem (with $\le$ instead of $\lt$);
+* the existence of a *floor* for any element of $R$;
+* some useful results about nested intervals;
+* the existence of an inverse for any non zero element (this, together with the existence of a floor for any element of $R$, implies that $R$ is Archimedean);
+* the least upper bound property.
+
 ## motivation
 
-My goal was to confirm that the set of axioms $(R_1)$-$(R_{15})$, together with $(H')$, could be used as a feasible foundation for proving the major results in first or second year algebra and analysis, in particular to define the usual functions and constants, the integral, some complex analysis, and prove the fundamental theorem of algebra.
+My goal was to confirm that the set of axioms $(R_1)$ - $(R_{15})$, together with $(H')$, was a feasible foundation for proving the major results in first or second year algebra and analysis, in particular to define the usual functions and constants, the integral, some complex analysis, and prove the fundamental theorem of algebra.
 
 Working with axioms can be tricky, as corner cases are easily overlooked. Hence the choice of a theorem prover for the first steps; the remaining steps are done, but aren't checked with ``lean`` (yet?).
 
-During my exploration of axioms $(R_1)$-$(R_{15})$, I noticed that with $(H')$ false, $R$ would be equal to $\mathbb{Z}$, and I added that.
+During my exploration of axioms $(R_1)$ - $(R_{15})$, I noticed that with $(H')$ false, $R$ would be equal to $\mathbb{Z}$, and I added that.
 
-I don't know of any reference, and didn't try to find some. Everything was built on snippets of memory, "white-room" like. The reference given at the start of ``case2_integers.lean`` was found later, while searching for a way to remove $(R_{15})$ in the $(H)$ case.
+I don't know of any reference, and didn't try to find some. Everything was built on snippets of memory, "clean room" like. The reference given at the start of ``case2_integers.lean`` was found later, while searching for a way to remove $(R_{15})$ in the $(H)$ case.
 
 
 
